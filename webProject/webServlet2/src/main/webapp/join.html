@@ -1,0 +1,22 @@
+<!DOCTYPE html> <!-- DTD (문서 지정형식) HTML5 -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>상품관리자등록페이지</title>
+</head>
+<body>
+<!-- 
+	form -> 사용자의 입력정보를 서버에 전송하는 요소 
+	action = "서버 주소" -> 사용자의 입력정보를 전송 받을 서버주소(Controller -> Servlet)	
+	method = "전송 방식" -> 서버에 사용자 정보를 전송해주는 방식 기본(GET), 대부분(POST)
+	name -> 칼럼명과 동일 -> DTO adminName >> admin_name
+	input:submit -> click하면 사용자 입력정보를 action주소로 보내주는 요소(실제실행)
+-->
+<h1>상품등록관리자 등록페이지</h1>
+<form action="admin_insert.do" method="POST">
+	관리자이름 : <input type="text" name="adminName"/> <br />
+	관리자비밀번호 : <input type="password" name="adminPassword"/> <br />
+	<input type="submit" value="관리자등록실행" />
+</form>
+</body>
+</html>

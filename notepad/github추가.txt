@@ -1,0 +1,21 @@
+
+C:\Users\Administrator\Desktop\jdbcProject>git init
+Initialized empty Git repository in C:/Users/Administrator/Desktop/jdbcProject/.git/
+
+C:\Users\Administrator\Desktop\jdbcProject>git add jdbcProject3
+
+C:\Users\Administrator\Desktop\jdbcProject>git commit -m "jdbcproject3"
+
+C:\Users\Administrator\Desktop\jdbcProject>git remote add origin github주소
+
+C:\Users\Administrator\Desktop\jdbcProject>git branch
+* master
+
+C:\Users\Administrator\Desktop\jdbcProject>git push origin master
+
+
+C:\Users\Administrator\Desktop\jdbcProject>git pull origin master
+
+C:\Users\Administrator\Desktop\jdbcProject>git push origin +master
+
+C:\Users\Administrator\Desktop\jdbcProject>

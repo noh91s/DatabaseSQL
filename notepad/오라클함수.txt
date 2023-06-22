@@ -1,0 +1,45 @@
+ 함수
+
+GROUP BY 그룹별 통계(똑같은 데이터를 하나의 행으로 묶어준다) -> 계산
+1. 그룹에 사용될 컬럼은 셀렉트문에 사용된 컬럼
+2. 집계함수와 GROUP BY를 같이 쓰면 일반 컬럼과도 사용 가능하다
+
+
+GROUP BY 와 HAVING
+GROUP BY - 특정 속성을 기준으로 테이블 전체를 그룹으로 설정
+SELECT 절에는 집단 연산자나 GROUP BY에 사용한 속성명 만을 사용
+	select sum(value) from 테이블명 group by value;
+공통되는 속성값으로 그룹핑을 했으므로, 각 그룹에서 개별 튜플을 접근할 수 없다
+	select sum(value), id from 테이블명 group by value; -- id 오류
+
+HAVING
+- 각 그룹에 다한 제약 조건을 기술
+- HAVINH 절은 GROUP BY 절과 같이 사용
+- WHERE 절은 전체 테이블의 조건 설정
+
+기본식 
+select 컬럼(ALL) or 그룹함수 
+from 테이블
+where 조건 
+group by 그룹대상칼럼명;
+
+
+집합 함수 : 테이블의 전체 행을 하나 이상의 칼럼을 기준으로 그룹화 하여 그 그룹 별 통계값을 출력하는 함수
+- sum : 그룹의 합계
+- avg : 그룹의 평균
+- count : 그룹의 개수
+- max : 그룹의 최대값
+- min : 그룹의 최소값
+- stdev : 그룹의 표준 편차 -> 오라클 STDDEV_POP
+- var : 그룹의 분산 -> 오라클 VAR_POP
+
+페이징(paging) -> tkdyd
+ROUND -> 반올림
+select round(0.123) from dual; -- 기본 소수 첫째자리에서 반올림
+select round(0.123, 2) from dual; -- 소수 두번째자리에서 반올림
+
+CEIL -> 올림
+select ceil(0.123) from dual;
+
+FLOOR -> 버림
+select floor(0.123) from dual;
