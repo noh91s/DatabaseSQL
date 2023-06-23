@@ -80,6 +80,36 @@ select * from member11 where userAge>30 order by userName DESC;
 -- member11 테이블의 멤버의 전체 나이의 합계
 select sum(userAge) 합계 from member11 where userAge>30 group by userAge; 
 
+drop table group1;
+create table group1(
+    name varchar2(100) not null,
+    price number not null,
+    depart varchar(100) not null
+);
 
+insert into group1(name,price,depart) values('m1',1000,'영업부');
+insert into group1(name,price,depart) values('m2',2000,'영업부');
+
+insert into group1(name,price,depart) values('m3',3000,'기획부');
+insert into group1(name,price,depart) values('m4',4000,'기획부');
+
+insert into group1(name,price,depart) values('m5',5000,'흥보부');
+insert into group1(name,price,depart) values('m6',6000,'흥보부');
+insert into group1(name,price,depart) values('m6',7000,'흥보부');
+
+TRUNCATE table group1;
+select * from group1;
+
+-- 그룹화 시킬 칼럼을 정하고 -> 그룹화 시킨 칼럼에 대한 그룹 함수를 작성
+-- 부서별 금액의 합계
+select depart 부서, sum(price) 부서별합계 from group1 group by depart;
+-- 부서별 금액의 평균
+select depart 부서, avg(price) 부서별평균 from group1 group by depart;
+-- 부서별 최대값
+select depart 부서, max(price) 부서별최댓값 from group1 group by depart;
+-- 부서별 최소값
+select depart 부서, min(price) 부서별최소값 from group1 group by depart;
+
+commit;
 
 

@@ -6,31 +6,33 @@ import java.sql.SQLException;
 
 import org.web.dbconnect.DBConnect;
 
-public class AdminDao {
-	private AdminDao() {
-
+public class EmployeeDao {
+	
+	private EmployeeDao() {
+		System.out.println("EmployeeDao <- 싱글톤");
 	}
-
+	
 	private static class SingletonClass {
-		private static final AdminDao INSTANCE = new AdminDao();
+		private static final EmployeeDao INSTANCE = new EmployeeDao();
 	}
 
-	public static AdminDao getInstance() {
+	public static EmployeeDao getInstance() {
 		return SingletonClass.INSTANCE;
 	}
 
-	public int insert(String adminName, String adminPassword) {
-		int rs = 0;
+	public int insert(String emp_name, String emp_depart, String emp_email) {
+		int rs=0;
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		String query = "";
 		try {
 			conn = DBConnect.getConnection();
-			query = "insert into admin_tb(admin_Id, admin_Name, admin_Password)" 
-					+ "values(admin_tb_seq.nextval,?,?)";
+			query = "insert into employee(emp_id, emp_name, emp_depart, emp_email)" 
+					+ "values(employee_seq.nextval,?,?,?)";
 			pstm = conn.prepareStatement(query);
-			pstm.setString(1, adminName);
-			pstm.setString(2, adminPassword);
+			pstm.setString(1, emp_name);
+			pstm.setString(2, emp_depart);
+			pstm.setString(3, emp_email);
 			rs = pstm.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

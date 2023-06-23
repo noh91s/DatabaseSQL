@@ -11,7 +11,7 @@ import org.web.dao.AdminDao;
 
 public class AdminInsertService implements AdminService{
 	@Override
-	public void executeQuerySerivce(HttpServletRequest request, HttpServletResponse response)
+	public void executeQueryService(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		String adminName=request.getParameter("adminName");

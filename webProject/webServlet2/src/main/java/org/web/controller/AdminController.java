@@ -39,7 +39,7 @@ public class AdminController extends HttpServlet{
 		if(basicURL.equals("/admin_insert.do")) {
 			System.out.println("상품관리자등록 서비스를 실행");
 			service=new AdminInsertService();
-			service.executeQuerySerivce(request, response);
+			service.executeQueryService(request, response);
 			
 		} else if(basicURL.equals("/admin_update.do")) {
 			System.out.println("상품관리자수정 서비스를 실행");

@@ -43,3 +43,18 @@ select ceil(0.123) from dual;
 
 FLOOR -> 버림
 select floor(0.123) from dual;
+
+순위함수
+rank()함수
+select 속성명, rank() over (order by 속성명 [asc|desc])
+동률에 대하여 동일 등수 배정 - 비연속식 등수 배정
+
+숫자 함수 다른 프로그램 언어 용어 사용
+ABS abs -> 절대값 -> 양수
+select abs(-10) from dual;
+POWER power -> 제곱 A(3)를 B(2) 만큼 제곱
+select power(3,2) from dual;
+MOD mod -> A(10)를 B(2)로 나누고 나머지
+select mod(10,2) from dual;
+SQRT() sqrt() -> 제곱근을 출력
+select SQRT(2) SQRT from dual;

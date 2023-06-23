@@ -5,3 +5,45 @@
 동적인 콘텐츠를 만들때 사용 된다.
 4. java 언어
 5. MVC Model2방식에서 Controller 역할을 담당한다
+6. JSP는 서블릿 기반 기술이다 JSP는 서블릿 보다 화면에 해당하는 애플리케이션 요소를 쉽게 만들수 있다
+	서블릿,JSP -> 서블릿(Controller), JSP(VIEW) MODEL2방식
+
+servlet 인터페이스
+init(): 서블릿 초기화(시작);
+service(): 클라이언트 요청에 대한 서비스 (doGet(),doPost())
+destrory(): 서비스 중지, 자원반납(종료) 
+
+HttpServletRequest -> 사용자 요청(Request)정보를 처리
+HttpServletResponse -> 사용자 요청
+
+HttpServlet 클래스
+- HTTP 요청을 서비스하는 서블릿은 HttpServlet을 상속해야 한다. 
+- GenericServlet 추상 클래스를 상속하는 클래스 HTTP 프로토콜에 특화된 서블릿이다. 
+- HttpServlet 클래스는 HTTP 요청을 처리하는 메소드를 제공한다. 
+- 클라이언트의 요청은 HttpServletRequest 객체 타입으로 서블릿에 전달되며, 
+서블릿은 HttpServletResponse 객체 타입을 사용하여 응답한다. (doGet(), doPost())
+
+
+                     WEB,HTTP
+클라언트 ->  브라우저	 서버 -> WAS  -> 요청받고 일을 처리........................
+                                             <-  응답 처리 View -> jsp 컴파일 HTML
+		        <- jsp컴파일 HTML 클라이언트 반환	
+
+
+
+ServletContext 인터페이스
+- setAttribute(String name, Object value) 데이터를 name| value 쌍으로 저장
+- getAttribute(String name) Object 주어진 name을 가진 데이터를 반환
+	String returnURL="";
+	request.setAttribute(reurnURL, "/index.jsp"; // reurnURL -> 저장
+	request.geetAttribute(reurnURL") // .reurnURL 저장 되어 있는값을 get
+- removeAttribute(String name) 주어진 name을 가진 데이터를 삭제
+
+
+getRequestDispatcher(String path) : RequestDispatcher 주어진 path에 위치하는 자원에 대한 RequestDispatcher 객체를 반환
+
+
+RequesetDispatcher 인터페이스
+클라이언트의 요청을 다른자원(서블릿, JSP)으로 전달하거나 다른 자원의 내용을 응답에 포함하기위해 사용한다
+forward(ServletRequest req, ServletResponse res) 클라이언트의 요청을 다른 자원으로 전달
+	자원을 가지고 View 전달

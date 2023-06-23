@@ -1,0 +1,29 @@
+회사 소속 직원 테이블
+drop table employee;
+create table employee (
+	emp_id number not null, -- 직원 고유번호 , 시퀀스 1000 시작
+	emp_name varchar(100) not null, -- 직원 이름
+	emp_depart varchar(100) not null, -- 부서 이름 (외래키) -> 부서테이블 부서명
+	emp_email varchar(100) not null, 
+	primary key(emp_id)
+);
+
+drop sequence employee_seq;
+create sequence empolyee_seq
+increment by 1
+start with 1000
+no cycle;
+
+회사 부서테이블
+drop table department;
+create table department(
+	depart_id number not null, -- 부서 고유 아이디, 시퀀스 1 시작
+	depart_name varchar(100) not null unique, -- emplyee emp_depart 외래키의 기본키
+	primary key(depart_id)
+}
+
+drop sequence department_seq
+create sequence department_seq
+increment by 1
+start with 1
+no cycle;
