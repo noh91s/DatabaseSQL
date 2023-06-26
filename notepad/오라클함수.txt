@@ -58,3 +58,10 @@ MOD mod -> A(10)를 B(2)로 나누고 나머지
 select mod(10,2) from dual;
 SQRT() sqrt() -> 제곱근을 출력
 select SQRT(2) SQRT from dual;
+
+select sysdate from dual;
+select systimestamp from dual;
+
+select sysdate , to_char(systimestamp, 'YYYY"년" MM"월" DD"일" hh":"mi":"ss"') from dual;
+
+정규표현식(이메일,전화) -> Spring Security Validation

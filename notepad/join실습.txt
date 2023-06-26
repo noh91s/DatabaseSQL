@@ -1,0 +1,218 @@
+
+drop table u1;
+--게시글 작성자
+create table u1(
+    userId varchar(100) not null primary key,
+    username varchar(100) not null
+);
+insert into u1(userId,username) values('m1','s1');//userId(중복X,Not Null)-. 게시글
+insert into u1(userId,username) values('m2','s1');
+insert into u1(userId,username) values('m3','s1');
+commit;
+--게시글
+    create table b1(
+    board varchar(200) not null,    -- 게시글
+    bId varchar(100) not null       -- 게시글 작성자
+);
+insert into b1(board,bId) values('con1','m1');
+insert into b1(board,bId)  values('con2','m1');
+insert into b1(board,bId)  values('con3','m1');
+insert into b1(board,bId)  values('con3','m4');
+insert into b1(board,bId)  values('con3','m5');
+insert into b1(board,bId)  values('con3','m6');
+
+
+--inner join
+select * 
+from u1 inner join b1
+on u1.userid=b1.bid;
+
+select *
+from u1 u inner join b1 b
+on u.userid=b.bid;
+
+select u.userId, b.board 
+from u1 u inner join b1 b
+on u.userid=b.bid;
+
+--outer join
+--left outer join
+select * 
+from u1 u left outer join b1 b
+on u.userid=b.bid;
+
+--right outer join
+select * 
+from u1 u right outer join b1 b
+on u.userid=b.bid;
+
+--full outer join
+select * 
+from u1 u full outer join b1 b
+on u.userid=b.bid;
+
+create sequence custno_seq
+increment by 1
+start with 100001
+nocycle;
+
+
+
+drop sequence custno_seq;
+
+create table member_07(
+    custno number(6) not null,
+    custname varchar2(20),
+    phone varchar2(13),
+    address varchar2(60),
+    joindate date,
+    grade char(1) ,
+    city char(2) ,
+    primary key(custno)
+);
+insert into member_07
+values (custno_seq.nextval, '김이름', '010-1111-2222', '서울 노원구 중계1동', '20221202', 'A', '01');
+
+insert into member_07
+values (custno_seq.nextval, '이소리', '010-1111-3333', '서울 노원구 중계2동', '20221206', 'B', '01');
+
+insert into member_07
+values (custno_seq.nextval, '박수진', '010-1111-4444', '경기도 수원시 망포동', '20221001', 'B', '03');
+
+insert into member_07
+values (custno_seq.nextval, '최수원', '010-1111-5555', '경기도 의정부시 감축동', '20221113', 'A', '03');
+
+insert into member_07
+values (custno_seq.nextval, '강만기', '010-1111-6666', '제주도 제주시 서귀포', '20221225', 'B', '06');
+
+insert into member_07
+values (custno_seq.nextval, '우리민', '010-1111-7777', '강원도 춘천시 춘천동', '20221211', 'C', '06');
+commit;
+
+select * from member_07;
+
+CREATE TABLE money_07(
+custno number(6),
+salenol number(8),
+pcost number(8),
+amount number(4),
+price number(8),
+pcode varchar2(4),
+sdate date
+);
+
+insert into money_07 values(100001, 2022001, 500, 5, 2500, 'A001', '20220101');
+insert into money_07 values(100001, 2022002, 1000, 4, 4000, 'A002', '20220101');
+insert into money_07 values(100001, 2022003, 500, 3, 1500, 'A008', '20220101');
+insert into money_07 values(100002, 2022004, 2000, 1, 2000, 'A004', '20220102');
+insert into money_07 values(100002, 2022005, 500, 1, 500, 'A001', '20220103');
+insert into money_07 values(100003, 2022006, 1500, 2, 3000, 'A003', '20220103');
+commit ;
+
+insert into money_07 values(100007, 2022001, 500, 5, 2500, 'A001', '20220101');
+insert into money_07 values(100007, 2022002, 1000, 4, 4000, 'A002', '20220101');
+insert into money_07 values(100008, 2022003, 500, 3, 1500, 'A008', '20220101');
+insert into money_07 values(100008, 2022004, 2000, 1, 2000, 'A004', '20220102');
+commit ;
+
+-- 1 상품을 구매한 회원번호
+select m1.custno, m1.custname, m2.pcost  -- 1
+from member_07 m1 inner join money_07 m2 -- 조인(내부,inner) 테이블의 칼럼명 동일 할 때
+on m1.custno =m2.custno;
+
+-- 2 그룹
+select  m1.custno, m1.custname 
+from member_07 m1    inner  join   money_07 m2 
+on m1.custno=m2.custno
+group by (m1.custname, m1.custno);
+
+--3. 집합 함수
+select m1.custno, m1.custname ,sum(m2.price) 지출합계
+from member_07 m1    inner  join   money_07 m2 
+on m1.custno=m2.custno
+group by (m1.custname, m1.custno);
+
+--4. 집합 함수2
+select m1.custno, m1.custname,m1.grade ,sum(m2.price) 지출합계
+from member_07 m1    inner  join   money_07 m2 
+on m1.custno=m2.custno
+group by (m1.custname, m1.custno, m1.grade);
+
+--5. 정렬
+select m1.custno, m1.custname,m1.grade ,sum(m2.price) 지출합계
+from member_07 m1    inner  join   money_07 m2 
+on m1.custno=m2.custno
+group by (m1.custname, m1.custno, m1.grade)
+order by 지출합계 desc;
+
+
+select  m1.custname , m2.custno
+from member_07 m1    inner  join   money_07 m2 
+on m1.custno=m2.custno
+group by( m1.custname,m2.custno );
+
+select  m1.custname , m2.custno,  sum(m2.price) as 합계 
+from member_07 m1    inner  join   money_07 m2 
+on m1.custno=m2.custno
+group by( m1.custname,m2.custno );
+
+
+select  m1.grade ,  m1.custname,  m2.custno,  sum(m2.price) as 합계 
+from member_07 m1    inner  join   money_07 m2 
+on m1.custno=m2.custno
+group by(m1.grade , m2.custno , m1.custname) 
+order by 합계 desc;
+
+
+
+
+select  m1.grade ,  m1.custname,  m2.custno,  sum(m2.price) as 합계 
+from member_07 m1    inner  join   money_07 m2 
+on m1.custno=m2.custno
+group by(m1.grade , m2.custno , m1.custname) 
+order by 합계 desc;
+
+
+
+
+insert into money_07 values(100004, 2022007, 500, 2, 1000, 'A001', '20220104');
+insert into money_07 values(100004, 2022008, 500, 1, 300, 'A005', '20220104');
+insert into money_07 values(100004, 2022009, 600, 1, 600, 'A006', '20220104');
+insert into money_07 values(100004, 2022010, 3000, 1, 3000, 'A007', '20220106');
+
+insert into money_07 values(100007, 2022001, 500, 5, 2500, 'A001', '20220101');
+insert into money_07 values(100007, 2022002, 1000, 4, 4000, 'A002', '20220101');
+insert into money_07 values(100008, 2022003, 500, 3, 1500, 'A008', '20220101');
+insert into money_07 values(100008, 2022004, 2000, 1, 2000, 'A004', '20220102');
+
+
+insert into money_07 values(100048, 2022009, 600, 1, 600, 'A006', '20220104');
+insert into money_07 values(100048, 2022010, 3000, 1, 3000, 'A007', '20220106');
+
+insert into money_07 values(100024, 2022001, 500, 5, 2500, 'A001', '20220101');
+insert into money_07 values(100024, 2022002, 1000, 4, 4000, 'A002', '20220101');
+insert into money_07 values(100047, 2022003, 500, 3, 1500, 'A008', '20220101');
+insert into money_07 values(100047, 2022004, 2000, 1, 2000, 'A004', '20220102');
+
+commit;
+select * from member_07;
+select * from money_07;
+
+alter table member_07 modify grade not null;
+
+select * from member_07;
+
+--join 예제
+select  m1.custno,  m2.pcost  from member_07 m1 inner  join   money_07 m2 on m1.custno=m2.custno;
+
+
+select  m1.grade ,m1.custname,m2.custno,sum(m2.price) as 합계 
+from member_07 m1 inner  join   money_07 m2 
+on m1.custno=m2.custno 
+group by(m1.grade,m2.custno,m1.custname) 
+order by 합계 desc;
+
+select  m1.custno, m1.custname,  m2.pcost   
+from member_07 m1 
+inner  join   money_07 m2 
+on m1.custno=m2.custno;

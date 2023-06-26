@@ -119,7 +119,7 @@ DDL:
 	board1테이블의 외래키 userId(외래키)는 writer_tb테이블의 userId(기본키)를 참조한다
 	외래키 설정이 되어 있는 칼럼은 반드시 참조하는 기본키 값이외의 다른값을 추가 할수 없다
 	참조무결성 위반
-	ALTER TABLE boart1 ADD FOEIGN KEY (userId) REFERENCES writer_tb(userId)
+	ALTER TABLE board1 ADD FOEIGN KEY (userId) REFERENCES writer_tb(userId)
 
 
 	primary key -> 유일성, not null
