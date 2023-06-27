@@ -1,0 +1,38 @@
+View -> 실제 프로젝트에서는 사용 안함
+1. 실제 테이블을 보기 위 한 가상 객체
+2. View는 조회를 기본으로 한다
+3. 한개 이상의 기본테이블이나 다른 뷰를이용하여 생성되는 가상 테이블
+4. 테이블에서 파생된 객체
+5. 뷰를 이용하면 중요한 데이터를 보호하기 위한 가상객체
+
+View 생성
+-- 뷰생성1		-- 기본테이블1
+create or replace view 뷰이름
+as
+select 칼럼1, 칼럼2 from 테이블;
+
+-- 뷰생성2
+create view 뷰이름
+as
+select 칼럽1, 칼럼2 from 테이블;
+
+teble, view
+-> "if EXIT 테이블, View" -> 만약 뷰, 테이블이 있으면 drop, create실행하지 X
+drop view if EXIT member0626_view_2;
+
+인덱스의 개념(색인)
+인덱스(Index) ->
+1) 검색 성능을 향상 시키기 위한 부가적인 자료 구조(빠른검색)
+2) 질의 명령문의 검색 속도를 향상시키기 위해 칼럼에 대해 생성하는 객체
+3) 포인터(주소값)를 이용하여 테이블에 저장된 데이터에 접근
+
+인덱스 생성 / 삭제 구문
+create index 색인명 on 테이블명(속성명, 속성명)
+drop index 색인명 on 테이블명
+
+create index 인덱스명 on 테이블(칼럼명1, 칼럼명2);
+create index 인덱스명 on 테이블(칼럼명1);
+create unique index 인덱스명 on 테이블(칼럼); -- 칼럼은 반드시 unique
+
+drop index 인덱스명;
+단점 -> 공간을 추가, 오히려 검색시간이 많이 걸릴 수 있다

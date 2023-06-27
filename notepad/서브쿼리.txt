@@ -104,8 +104,14 @@ on <조인될 조건>
 - 회원등록실패 -> joinFail.jsp
 - 게시글등록실패 -> writeFail.jsp
 
+get -> 브라우저
+a태그로 서버로 URL요청 -> GET방식
+브라우저의 주소로 서버로 URL요청 -> GET방식
+form의 기본서버 전송방식(method) -> GET방식
 
-
+		컴파일		실행
+JAVA	->	.class		.exe
+JSP 	-> 	.class		.exe -> HTML리턴	
 
 
 집합연산

@@ -29,7 +29,7 @@ public class BoardInsertService implements BoardService {
 			returnURL="/writeFail.jsp";
 		}else {
 			System.out.println("게시글등록 성공!");
-			returnURL="/writeView.jsp";
+			returnURL="/BoardListView.do";
 		}
 		
 		request.setAttribute("returnURL", returnURL);

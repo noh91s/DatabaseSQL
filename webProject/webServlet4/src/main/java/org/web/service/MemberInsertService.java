@@ -25,11 +25,16 @@ public class MemberInsertService implements MemberService{
 			String returnURL="";
 			
 			if(rs!=1) {
+				if(rs==2) {
+					System.out.println("이미등록된 사용자");
+					returnURL="/joinFail.jsp";
+				} else {
 				System.out.println("회원가입 실패!");
-				returnURL="/joinfail.jsp";
+				returnURL="/joinFail.jsp";
+				}
 			}else {
 				System.out.println("회원가입 성공!");
-				returnURL="/writeView.jsp";
+				returnURL="/memberListView.do";
 			}
 			
 			request.setAttribute("returnURL", returnURL);

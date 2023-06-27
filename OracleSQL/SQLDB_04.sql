@@ -281,3 +281,7 @@ select custno from money_07;
 select custno from member_07
 intersect 
 select custno from money_07;
+
+
+select * from member0626;
+select * from board0626;

@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>게시글등록페이지</h1>
-<form action="writeOk.do">
+<form action="writeOk.do" method="POST">
 글제목 : <input type="text" name="board_title" id="board_title" /><br />
 글내용 : <input type="text" name="board_content" id="board_content" /><br />
 글쓴이 : <input type="text" name="board_writer" id="board_writer" /><br />

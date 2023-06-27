@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.web.service.BoardDetailService;
 import org.web.service.BoardInsertService;
+import org.web.service.BoardListViewService;
 import org.web.service.BoardService;
 import org.web.service.MemberInsertService;
+import org.web.service.MemberListViewService;
 import org.web.service.MemberService;
 
 @WebServlet("*.do") // URL 패턴
@@ -56,6 +59,19 @@ public class MainController extends HttpServlet {
 			boardService = new BoardInsertService();
 			boardService.executeQueryService(request, response);
 			returnURL = (String) request.getAttribute("returnURL");
+		} else if (basicURL.equals("/memberListView.do")) {
+			memberService = new MemberListViewService();
+			memberService.executeQueryService(request, response);
+			returnURL = (String) request.getAttribute("returnURL");
+		} else if (basicURL.equals("/BoardListView.do")) {
+			boardService = new BoardListViewService();
+			boardService.executeQueryService(request, response);
+			returnURL = (String) request.getAttribute("returnURL");
+		} else if (basicURL.equals("/boardDetail.do")) {
+			boardService = new BoardDetailService();
+			boardService.executeQueryService(request, response);
+			returnURL = (String) request.getAttribute("returnURL");
+			
 		} else {
 			returnURL = "/joinFail.jsp";
 		}
