@@ -1,0 +1,153 @@
+Oracle , Mysql 주요 차이점
+
+		Oracle		Mysql
+데이터타입	int		number
+		varchar		varchar2
+		acto_increment 	sequence
+
+Mysql
+1. 공개형 무료 데이터 베이스
+2. 사용에 큰 제한이 없다
+3. java, PHP등 개발 언어와 연동이 쉽다. C, C++, Java, PHP, Python...
+4. 다양한 OS지원
+
+- DB생성
+show databases; /*데이터베이스 조회*/
+create database mysqltest; /*DB 생성*/
+use mysqltest; /*DB 사용*/
+show tables; /*DB 테이블 조회*/
+
+
+1. 사용자 생성(등록)
+mysql> create user '사용자'@'localhost' identified by '비밀번호';
+mysql> create user 'user1'@'localhost' identified by '1111';
+
+
+2. 사용자 권한
+mysql> grant all privileges on *.* to '사용자'@'localhost';		<< 모든 DB에 권한
+mysql> grant all privileges on DB이름.* to '사용자'@'localhost';	<< 특정 DB에 권한
+
+3. 사용자 삭제
+drop user '사용자'@'localhost';
+// mysql DB >> 사용자정보, DB정보
+use mysql; // DB를 사용하겠다
+show tables; // DB에 테이블 조회
+select user from user; // user 테이블 조회
+select user from user;
+
+- Mysql 데이터 타입
+ 숫자형
+int(Integer) 정수형(4) -- Oracle number
+float
+double
+
+ 날짜형
+date		날짜만
+datetime		날짜와 시간 -> LocalDateTime;
+timestamp	1970/1/1 0시 이후 부터.. 날 숫자..
+
+ 문자형
+char		고정길이 char(10)
+varchar		변동형 varchar(10) ..5 >> varchar(5) -- Oracle varchar2()
+
+ 텍스트(장문)
+blog, text	게시글, 방명록
+
+
+기본날짜 -> 날짜, 시간은 JPA 자동으로 생성, 수정 날짜 시간을 처리 하도록 개발자가 프로그래밍 한다
+	date default (current_date)
+	datetime default (current_time)
+	datetime default current_timestamp
+	datetime default now() 날짜 + 시간
+
+
+CREATE TABLE `mysql06`.`board1` (
+  `board_id` BIGINT(10) NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(100) NOT NULL,
+  `content` VARCHAR(255) NOT NULL,
+  `writer` VARCHAR(100) NOT NULL,
+  `create_date` DATE NULL DEFAULT now(),
+  PRIMARY KEY (`board_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_bin;
+
+-- 칼럼 명 변경
+alter table 테이블명 change 칼럼명1 칼럼명2 데이터형;
+-- 칼럼 삭제
+alter table 테이블명 drop 삭제하려는 칼럼명;
+-- 칼럼 추가
+alter table 테이블명 add 새로운 칼럼명 데이터형;
+-- 칼럼의 데이터 형 수정하기
+alter table 테이블명 modify 칼럼명 새로운 데이터형;
+-- 테이블명 수정
+alter table 예전테이블명 rename 새로운 테이블명;
+
+
+외래키 설정
+
+테이블이 만들어 진 이후에 테이블간에 설정
+ALTER TABlㄸ 테이블1
+add foreign key (외래키) references 참조테이블(참조키);
+
+테이블 생성
+
+
+
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema mysql06
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mysql06
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mysql06` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `mysql06` ;
+
+-- -----------------------------------------------------
+-- Table `mysql06`.`member0626`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mysql06`.`member0626` (
+  `member0626_id` BIGINT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  `password` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `create_date` DATE NOT NULL,
+  PRIMARY KEY (`member0626_id`),
+  UNIQUE INDEX `email` (`email` ASC) VISIBLE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `mysql06`.`board0626`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mysql06`.`board0626` (
+  `board0626_id` BIGINT NOT NULL AUTO_INCREMENT,
+  `board_title` VARCHAR(100) NOT NULL,
+  `board_content` VARCHAR(255) NOT NULL,
+  `board_writer` VARCHAR(255) NOT NULL,
+  `create_date` DATE NOT NULL,
+  PRIMARY KEY (`board0626_id`),
+  INDEX `board_writer` (`board_writer` ASC) VISIBLE,
+  CONSTRAINT `board0626_ibfk_1`
+    FOREIGN KEY (`board_writer`)
+    REFERENCES `mysql06`.`member0626` (`email`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
